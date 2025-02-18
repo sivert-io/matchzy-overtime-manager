@@ -1,5 +1,12 @@
 import express from "express";
 import bodyParser from "body-parser";
+import { MatchzyEvent } from "./types/matchzy";
+import { createLogger, Logger as print } from "lovely-logs";
+
+createLogger({
+  platform: "console",
+  timestampEnabled: true,
+});
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,20 +21,20 @@ let matchState = {
 
 // Route to handle get5 events
 app.post("/events", (req, res) => {
-  const event = req.body;
-  console.log("Received event:", event);
+  const event: MatchzyEvent = req.body;
+  print.info("Received event:", event);
 
   if (event.event === "series_end") {
-    console.log("Match finished. Resetting state.");
+    print.info("Match finished. Resetting state.");
     matchState.overtimeCount = 0;
   }
 
-  if (event.event === "overtime_start") {
+  if (event.event === "round_end") {
     matchState.overtimeCount++;
-    console.log(`Overtime started! Count: ${matchState.overtimeCount}`);
+    print.info(`Overtime started! Count: ${matchState.overtimeCount}`);
 
     if (matchState.overtimeCount > matchState.maxOvertimes) {
-      console.log("Max overtimes reached. Forcing match end.");
+      print.info("Max overtimes reached. Forcing match end.");
       endMatch();
     }
   }
@@ -36,10 +43,10 @@ app.post("/events", (req, res) => {
 });
 
 function endMatch() {
-  console.log("Triggering match force end (this logic can be expanded)");
+  print.info("Triggering match force end (this logic can be expanded)");
   // Implement logic to force end match here
 }
 
 app.listen(PORT, () => {
-  console.log(`MatchZy server is running on port ${PORT}`);
+  print.success(`MOM is running on port ${PORT}`);
 });

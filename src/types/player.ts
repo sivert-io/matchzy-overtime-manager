@@ -1,4 +1,4 @@
-type PlayerStats = {
+export type PlayerStats = {
   kills: number;
   deaths: number;
   assists: number;
@@ -34,35 +34,8 @@ type PlayerStats = {
   mvp: number;
 };
 
-type Player = {
+export type Player = {
   steamid: string;
   name: string;
   stats: PlayerStats;
-};
-
-type Team = {
-  id: string;
-  name: string;
-  series_score: number;
-  score: number;
-  score_ct: number;
-  score_t: number;
-  players: Player[];
-  side: "ct" | "t";
-  starting_side: "ct" | "t";
-};
-
-type RoundEndEvent = {
-  event: "round_end";
-  matchid: number;
-  map_number: number;
-  round_number: number;
-  round_time: number;
-  reason: number;
-  winner: {
-    side: "ct" | "t";
-    team: "team1" | "team2";
-  };
-  team1: Team;
-  team2: Team;
 };
