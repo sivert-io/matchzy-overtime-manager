@@ -67,7 +67,7 @@ Alternatively, you can use Docker Compose:
    docker-compose up -d
    ```
 
-## Configuration ⚙️
+## CS2 Server Configuration ⚙️
 
 To make get5 send match events to MOM, [update your CS2 server’s `matchzy_remote_log_url` parameter](https://shobhit-pathak.github.io/MatchZy/configuration/#matchzy_remote_log_url):
 
