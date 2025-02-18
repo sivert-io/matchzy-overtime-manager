@@ -39,12 +39,12 @@ Matchzy Overtime Manager is an extension for the MatchZy CS2 plugin. It runs as 
 
 ## Configuration ⚙️
 
-To make get5 send match events to Matchzy Overtime Manager, update your CS2 server’s `get5.cfg`:
+To make get5 send match events to Matchzy Overtime Manager, [update your CS2 server’s `matchzy_remote_log_url` parameter](https://shobhit-pathak.github.io/MatchZy/configuration/#matchzy_remote_log_url):
 
-```json
-"MatchConfig": {
-  "event_api_url": "http://your-express-server-ip:3000/events"
-}
+Use this console command:
+
+```bash
+matchzy_remote_log_url "url"
 ```
 
 Replace `your-express-server-ip` with the actual IP address of your MatchZy Overtime Manager server.
