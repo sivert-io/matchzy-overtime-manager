@@ -2,12 +2,6 @@
 
 Matchzy Overtime Manager is an extension for the MatchZy CS2 plugin. It runs as an Express server in TypeScript, listens for get5 events, and enforces custom overtime rules to prevent excessive overtimes in tournaments. 🎮🏆
 
-## Features ✨
-- 🎧 Listens for CS2 match events via get5
-- ⚙️ Automatically handles overtime scenarios
-- 📝 Written in TypeScript for type safety
-- 🚀 Simple and lightweight Express server
-
 ## Table of Contents 📖
 - [Features ✨](#features-)
 - [Installation 🛠️](#installation-️)
@@ -18,6 +12,12 @@ Matchzy Overtime Manager is an extension for the MatchZy CS2 plugin. It runs as 
 - [Development 🏗️](#development-️)
 - [Contributing 🤝](#contributing-)
 - [Thanks 🙌](#thanks-)
+
+## Features ✨
+- 🎧 Listens for CS2 match events via get5
+- ⚙️ Automatically handles overtime scenarios
+- 📝 Written in TypeScript for type safety
+- 🚀 Simple and lightweight Express server
 
 ## Installation 🛠️
 
