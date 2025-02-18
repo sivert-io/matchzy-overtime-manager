@@ -71,13 +71,13 @@ Alternatively, you can use Docker Compose:
 
 To make get5 send match events to MOM, [update your CS2 server’s `matchzy_remote_log_url` parameter](https://shobhit-pathak.github.io/MatchZy/configuration/#matchzy_remote_log_url):
 
-Use this console command:
+Add this line to your `/game/csgo/cfg/MatchZy/config.cfg` file at the bottom **or** use it as a console command:
 
 ```bash
-matchzy_remote_log_url "your-ip:3000/events"
+matchzy_remote_log_url "http://127.0.0.1:3000/events"
 ```
 
-Replace `your-ip` with the actual IP address of your MOM server.
+Replace `127.0.0.1` with the actual IP address of your MOM server (if running on a different host).
 
 ## Development 🏗️
 
