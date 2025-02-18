@@ -1,6 +1,6 @@
-# Matchzy Overtime Manager ⚡
+# Matchzy Overtime Manager (MOM) ⚡
 
-Matchzy Overtime Manager is an extension for the MatchZy CS2 plugin. It runs as an Express server in TypeScript, listens for get5 events, and enforces custom overtime rules to prevent excessive overtimes in tournaments. 🎮🏆
+MOM is an extension for the MatchZy CS2 plugin. It runs as an Express server in TypeScript, listens for get5 events, and enforces custom overtime rules to prevent excessive overtimes in tournaments. 🎮🏆
 
 ## Table of Contents 📖
 - [Features ✨](#features-)
@@ -50,7 +50,7 @@ Matchzy Overtime Manager is an extension for the MatchZy CS2 plugin. It runs as 
 
 ### Running with Docker 🐳
 
-To start Matchzy Overtime Manager using Docker:
+To start MOM using Docker:
 
 1. Build the Docker image:
    ```sh
@@ -69,7 +69,7 @@ Alternatively, you can use Docker Compose:
 
 ## Configuration ⚙️
 
-To make get5 send match events to Matchzy Overtime Manager, [update your CS2 server’s `matchzy_remote_log_url` parameter](https://shobhit-pathak.github.io/MatchZy/configuration/#matchzy_remote_log_url):
+To make get5 send match events to MOM, [update your CS2 server’s `matchzy_remote_log_url` parameter](https://shobhit-pathak.github.io/MatchZy/configuration/#matchzy_remote_log_url):
 
 Use this console command:
 
@@ -77,7 +77,7 @@ Use this console command:
 matchzy_remote_log_url "url"
 ```
 
-Replace `your-express-server-ip` with the actual IP address of your MatchZy Overtime Manager server.
+Replace `your-express-server-ip` with the actual IP address of your MOM server.
 
 ## Development 🏗️
 
