@@ -74,7 +74,7 @@ To make get5 send match events to MOM, [update your CS2 server’s `matchzy_remo
 Use this console command:
 
 ```bash
-matchzy_remote_log_url "your-ip/events"
+matchzy_remote_log_url "your-ip:3000/events"
 ```
 
 Replace `your-ip` with the actual IP address of your MOM server.
