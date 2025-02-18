@@ -8,6 +8,17 @@ Matchzy Overtime Manager is an extension for the MatchZy CS2 plugin. It runs as 
 - 📝 Written in TypeScript for type safety
 - 🚀 Simple and lightweight Express server
 
+## Table of Contents 📖
+- [Features ✨](#features-)
+- [Installation 🛠️](#installation-️)
+  - [Prerequisites 📌](#prerequisites-)
+  - [Setup 🔧](#setup-)
+  - [Running with Docker 🐳](#running-with-docker-)
+- [Configuration ⚙️](#configuration-️)
+- [Development 🏗️](#development-️)
+- [Contributing 🤝](#contributing-)
+- [Thanks 🙌](#thanks-)
+
 ## Installation 🛠️
 
 ### Prerequisites 📌
@@ -35,6 +46,25 @@ Matchzy Overtime Manager is an extension for the MatchZy CS2 plugin. It runs as 
 4. Start the server:
    ```sh
    npm start
+   ```
+
+### Running with Docker 🐳
+
+To start Matchzy Overtime Manager using Docker:
+
+1. Build the Docker image:
+   ```sh
+   docker build -t matchzy-overtime-manager .
+   ```
+
+2. Run the container:
+   ```sh
+   docker run -d -p 3000:3000 --name matchzy-overtime-manager matchzy-overtime-manager
+   ```
+
+Alternatively, you can use Docker Compose:
+   ```sh
+   docker-compose up -d
    ```
 
 ## Configuration ⚙️
