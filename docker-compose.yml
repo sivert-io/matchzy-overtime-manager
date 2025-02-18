@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  matchzy-overtime-manager:
+    build: .
+    container_name: matchzy-overtime-manager
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
