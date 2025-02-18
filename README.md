@@ -8,7 +8,7 @@ MOM is an extension for the MatchZy CS2 plugin. It runs as an Express server in 
   - [Prerequisites 📌](#prerequisites-)
   - [Setup 🔧](#setup-)
   - [Running with Docker 🐳](#running-with-docker-)
-- [Configuration ⚙️](#configuration-️)
+- [Configuration ⚙️](#cs2-server-configuration-️)
 - [Development 🏗️](#development-️)
 - [Contributing 🤝](#contributing-)
 - [Thanks 🙌](#thanks-)
