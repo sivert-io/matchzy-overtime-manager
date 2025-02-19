@@ -12,15 +12,19 @@ export async function endMatch(
     serverId,
     [
       `css_fp`,
+      `matchzy_admin_chat_prefix {BlueGrey}`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
       `matchzy_admin_chat_prefix {Red}[ADMIN]{Default}`,
-      `css_asay ʕᵔᴥᵔʔ`,
-      `css_asay ʕᵔᴥᵔʔ`,
-      `css_asay ʕᵔᴥᵔʔ`,
-      `css_asay ʕᵔᴥᵔʔ`,
-      `css_asay ʕᵔᴥᵔʔ`,
-      `css_asay ʕᵔᴥᵔʔ`,
-      `css_asay ʕᵔᴥᵔʔ`,
-      `css_asay ʕᵔᴥᵔʔ`,
       `css_asay The match has concluded!!`,
     ].join(";")
   );
@@ -29,7 +33,7 @@ export async function endMatch(
 
   sendCommand(
     serverId,
-    `css_asay The winner will be the team with the highest total damage, calculated by summing up all players' damage.`
+    `css_asay The winner will be the team with the highest total damage.`
   );
 
   await timeout(5000);
@@ -48,9 +52,9 @@ export async function endMatch(
   sendCommand(
     serverId,
     [
-      `css_asay ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~`,
-      `css_asay ${matchDetails[winner].name} 👑`,
-      `css_asay ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~`,
+      `css_asay ~ ヽ(´ー｀)ノ ~ ヽ(´ー｀)ノ ~ ヽ(´ー｀)ノ`,
+      `css_asay ヽ(´ー｀)ノ ${matchDetails[winner].name} ヽ(´ー｀)ノ`,
+      `css_asay ~ ヽ(´ー｀)ノ ~ ヽ(´ー｀)ノ ~ ヽ(´ー｀)ノ`,
     ].join(";")
   );
 
@@ -60,8 +64,8 @@ export async function endMatch(
     serverId,
     [
       `css_asay GG WP!`,
-      `css_asay ${matchDetails.team1.name} total damage: ${totalDamage.team1}`,
-      `css_asay ${matchDetails.team2.name} total damage: ${totalDamage.team2}`,
+      `css_asay ${matchDetails.team1.name}: ${totalDamage.team1}`,
+      `css_asay ${matchDetails.team2.name}: ${totalDamage.team2}`,
     ].join(";")
   );
 
