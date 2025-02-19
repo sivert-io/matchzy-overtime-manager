@@ -24,9 +24,9 @@ app.post("/events", (req, res) => {
   const event: MatchzyEvent = req.body;
   print.info("Received event:", event.event);
 
+  print.info(req.headers);
   // Get IP of the server that sent the event
   const serverId = req.headers["server-id"] as string;
-  print.info(`Event received from server: ${serverId}`);
 
   if (event.event === "round_end") {
     handleRoundEndEvent(serverId, event);
@@ -36,5 +36,6 @@ app.post("/events", (req, res) => {
 });
 
 app.listen(PORT, () => {
+  console.clear();
   print.success(`MOM is running on port ${PORT}`);
 });

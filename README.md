@@ -7,8 +7,9 @@ MOM is an extension for the MatchZy CS2 plugin. It runs as an Express server in 
 - [Installation 🛠️](#installation-️)
   - [Prerequisites 📌](#prerequisites-)
   - [Setup 🔧](#setup-)
+  - [Environment Configuration 🌍](#environment-configuration-)
   - [Running with Docker 🐳](#running-with-docker-)
-- [Configuration ⚙️](#cs2-server-configuration-️)
+- [CS2 Server Configuration ⚙️](#cs2-server-configuration-️)
 - [Development 🏗️](#development-️)
 - [Contributing 🤝](#contributing-)
 - [Thanks 🙌](#thanks-)
@@ -46,6 +47,25 @@ MOM is an extension for the MatchZy CS2 plugin. It runs as an Express server in 
 4. Start the server:
    ```sh
    npm start
+   ```
+
+### Environment Configuration 🌍
+
+Before running MOM, you need to configure your environment variables:
+
+1. Copy the example environment file:
+   ```sh
+   cp .env.example .env
+   ```
+2. Open `.env` and replace the values with your server configuration:
+   ```ini
+   # Use server-id as prefix. e.g. server1_<variable_name>
+   server1_rcon_host="127.0.0.1"
+   server1_rcon_port="27016"
+   server1_rcon_password="your_rcon_password"
+   
+   # Maximum number of rounds allowed before calculating the winner
+   max_rounds=30
    ```
 
 ### Running with Docker 🐳
