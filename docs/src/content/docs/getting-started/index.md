@@ -14,9 +14,9 @@ Welcome to the **Matchzy Overtime Manager (MOM)** setup guide. This guide will t
 
 Click on a step below to begin:
 
-- [Step 1: Cloning the Repository](step-1)
-- [Step 2: Setting Up Environment Variables](step-2)
-- [Step 3: Starting MOM](step-3)
-- [Step 4: Configuring Your CS2 Server](step-4)
+- [Step 1: Cloning the Repository](/getting-started/step-1)
+- [Step 2: Setting Up Environment Variables](/getting-started/step-2)
+- [Step 3: Starting MOM](/getting-started/step-3)
+- [Step 4: Configuring Your CS2 Server](/getting-started/step-4)
 
 Once complete, MOM will listen for CS2 events and print them in the console! 🚀
