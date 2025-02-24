@@ -28,6 +28,8 @@ export default defineConfig({
           autogenerate: { directory: "reference" },
         },
       ],
+      credits: true,
+      defaultLocale: "en",
     }),
   ],
 });
