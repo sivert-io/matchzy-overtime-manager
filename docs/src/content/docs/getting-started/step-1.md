@@ -6,9 +6,11 @@ description: This guide will help you set up and run MOM using different methods
 To get started with **Matchzy Overtime Manager (MOM)**, the first step is to clone the repository.
 
 ## What is Cloning?
+
 Cloning a repository means downloading a copy of the source code to your local machine so you can modify, run, or build it.
 
 ## Instructions
+
 1. Open a terminal or command prompt.
 2. Run the following command:
    ```sh

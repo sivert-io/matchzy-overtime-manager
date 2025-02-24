@@ -22,9 +22,9 @@ cp .env.example .env
 
 ```ini
 # Server 1 configuration
-server1_rcon_host="127.0.0.1"         
-server1_rcon_port="27015"             
-server1_rcon_password="your_rcon_password"  
+server1_rcon_host="127.0.0.1"
+server1_rcon_port="27015"
+server1_rcon_password="your_rcon_password"
 
 # Server 2 configuration
 server2_rcon_host="127.0.0.1"

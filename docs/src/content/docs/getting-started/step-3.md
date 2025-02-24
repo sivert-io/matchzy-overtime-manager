@@ -6,6 +6,7 @@ description: This guide will help you set up and run MOM using different methods
 Now that your environment variables are set up, it's time to decide how to run **Matchzy Overtime Manager (MOM)**. You can choose between **Docker** or a JavaScript runtime like **Node.js**, **Yarn**, or **Bun**.
 
 ## Option 1: Using Docker 🐳
+
 Docker is a containerization platform that allows you to run applications in isolated environments. If you don’t have Docker installed, you can get it here: [Docker](https://www.docker.com/).
 
 To run MOM using Docker:
@@ -24,6 +25,7 @@ To run MOM using Docker:
    ```
 
 ## Option 2: Using a JavaScript Runtime
+
 If you prefer to run MOM natively, you can use one of the following JavaScript runtimes:
 
 - [Node.js](https://nodejs.org/)
