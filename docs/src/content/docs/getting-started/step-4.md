@@ -1,5 +1,5 @@
 ---
-title: Step 5 Configuring Your CS2 Server ⚙️
+title: Step 4 Configuring Your CS2 Server ⚙️
 description: This guide will help you set up and run MOM using different methods, including **npm** and **Docker**.
 ---
 
