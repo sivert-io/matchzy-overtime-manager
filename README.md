@@ -83,9 +83,31 @@ To start MOM using Docker:
    ```
 
 2. Run the container:
+
+With .env:
+
    ```sh
    docker run -d -p 3000:3000 --name matchzy-overtime-manager matchzy-overtime-manager
    ```
+
+Without .env:
+
+   ```sh
+   docker run -d \
+  --name matchzy-overtime-manager \
+  -p 3000:3000 \
+  -e NODE_ENV=production \
+  -e server1_rcon_host="127.0.0.1" \
+  -e server1_rcon_port="27015" \
+  -e server1_rcon_password="your_rcon_password" \
+  -e server2_rcon_host="127.0.0.1" \
+  -e server2_rcon_port="27016" \
+  -e server2_rcon_password="your_rcon_password" \
+  -e max_rounds=30 \
+  --restart unless-stopped \
+  matchzy-overtime-manager
+   ```
+
 
 Alternatively, you can use Docker Compose:
    ```sh
