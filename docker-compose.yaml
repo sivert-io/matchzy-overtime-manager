@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  matchzy-overtime-manager:
+    build: .
+    container_name: matchzy-overtime-manager
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      # Uncomment to use
+      #- server1_rcon_host="127.0.0.1"
+      #- server1_rcon_port="27015"
+      #- server1_rcon_password="your_rcon_password"
+      #- server2_rcon_host="127.0.0.1"
+      #- server2_rcon_port="27016"
+      #- server2_rcon_password="your_rcon_password"
+      #- max_rounds=30
+    restart: unless-stopped
