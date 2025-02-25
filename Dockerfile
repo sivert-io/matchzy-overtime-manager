@@ -16,7 +16,7 @@ COPY . .
 COPY .env .env
 
 # Build TypeScript code
-RUN npm run build
+RUN npm run start
 
 # Expose port 3000
 EXPOSE 3000
