@@ -26,12 +26,12 @@ export function sendWebhook(data: webhookData) {
         fields: [
           {
             name: `🔹 ${data.team1}`,
-            value: `**Rounds Won:** ${data.roundsWon1} \n**Total Damage:** ${data.roundsWon1}`,
+            value: `**Rounds Won:** ${data.roundsWon1} \n**Total Damage:** ${data.totalDamage1}`,
             inline: true,
           },
           {
             name: `🔸 ${data.team2}`,
-            value: `**Rounds Won:** ${data.roundsWon2} \n**Total Damage:** ${data.roundsWon2}`,
+            value: `**Rounds Won:** ${data.roundsWon2} \n**Total Damage:** ${data.totalDamage2}`,
             inline: true,
           },
         ],
