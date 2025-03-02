@@ -1,6 +1,7 @@
 import { RoundEndEvent } from "../types/round_events";
 import { sendCommand } from "./rcon";
 import { printTeamIndividualDamage, timeout } from "./tools";
+import { sendWebhook } from "./webhook";
 
 export async function endMatch(
   serverId: string,
@@ -13,6 +14,18 @@ export async function endMatch(
     [
       `css_fp`,
       `matchzy_admin_chat_prefix {BlueGrey}`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
+      `css_asay ʕᵔᴥᵔʔ`,
       `css_asay ʕᵔᴥᵔʔ`,
       `css_asay ʕᵔᴥᵔʔ`,
       `css_asay ʕᵔᴥᵔʔ`,
@@ -41,22 +54,24 @@ export async function endMatch(
   sendCommand(
     serverId,
     [
-      `css_asay [PLAYERS DAMAGE]`,
       ...printTeamIndividualDamage(matchDetails),
       `css_asay And the winner is...`,
     ].join(";")
   );
 
-  await timeout(5000);
+  await timeout(2500);
 
-  sendCommand(
-    serverId,
-    [
-      `css_asay ~ ヽ(´ー｀)ノ ~ ヽ(´ー｀)ノ ~ ヽ(´ー｀)ノ`,
-      `css_asay ヽ(´ー｀)ノ ${matchDetails[winner].name} ヽ(´ー｀)ノ`,
-      `css_asay ~ ヽ(´ー｀)ノ ~ ヽ(´ー｀)ノ ~ ヽ(´ー｀)ノ`,
-    ].join(";")
-  );
+  sendCommand(serverId, [`css_asay ${matchDetails[winner].name}!!`].join(";"));
+
+  sendWebhook({
+    team1: matchDetails.team1.name,
+    team2: matchDetails.team2.name,
+    roundsWon1: matchDetails.team1.score,
+    roundsWon2: matchDetails.team2.score,
+    totalDamage1: totalDamage.team1,
+    totalDamage2: totalDamage.team2,
+    winner: matchDetails[winner].name,
+  });
 
   await timeout(5000);
 
@@ -64,8 +79,8 @@ export async function endMatch(
     serverId,
     [
       `css_asay GG WP!`,
-      `css_asay ${matchDetails.team1.name}: ${totalDamage.team1}`,
-      `css_asay ${matchDetails.team2.name}: ${totalDamage.team2}`,
+      `css_asay ${matchDetails.team1.name} total damage: ${totalDamage.team1}`,
+      `css_asay ${matchDetails.team2.name} total damage: ${totalDamage.team2}`,
     ].join(";")
   );
 
