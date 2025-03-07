@@ -2,7 +2,7 @@ import { createLogger, Logger as print } from "lovely-logs";
 import { matchzy_commands, tv_commands } from "../data/commands_to_send_server";
 import { sendCommand } from "./rcon";
 
-export function PingServers() {
+export async function PingServers() {
   // Ping all servers
   const servers = process.env.server_ids_to_ping?.split(",");
 

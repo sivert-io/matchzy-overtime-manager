@@ -63,6 +63,7 @@ app.get("/startPing", (_req, res) => {
     PingServers();
   }, Number(process.env.ping_timeout) || 600000);
 
+  PingServers();
   res.send("Ping started.");
 });
 
