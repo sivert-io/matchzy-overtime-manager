@@ -5,8 +5,7 @@ import { createLogger, Logger as print } from "lovely-logs";
 import { handleRoundEndEvent } from "./utils/match";
 import { sendWebhook } from "./utils/webhook";
 import { calculateTeamDamage } from "./utils/tools";
-import { sendCommand } from "./utils/rcon";
-import { matchzy_commands, tv_commands } from "./data/commands_to_send_server";
+import { PingServers } from "./utils/pingServers";
 
 createLogger({
   platform: "console",
@@ -53,37 +52,31 @@ app.post("/events", (req, res) => {
   res.sendStatus(200);
 });
 
+let timer: NodeJS.Timeout | null = null;
+
+app.get("/startPing", (_req, res) => {
+  if (timer) {
+    return res.status(400).send("Ping is already running.");
+  }
+
+  timer = setInterval(() => {
+    PingServers();
+  }, Number(process.env.ping_timeout) || 600000);
+
+  res.send("Ping started.");
+});
+
+app.get("/stopPing", (_req, res) => {
+  if (timer) {
+    clearInterval(timer);
+    timer = null;
+    res.send("Ping stopped.");
+  } else {
+    res.status(400).send("No active ping to stop.");
+  }
+});
+
 app.listen(PORT, () => {
   console.clear();
   print.success(`MOM is running on port ${PORT}`);
 });
-
-// Interval that pings all servers every 10 minutes and sends rcon commands
-setInterval(() => {
-  // Ping all servers
-  const servers = process.env.server_ids_to_ping?.split(",");
-
-  if (!servers) {
-    print.info("No servers to ping!");
-    return;
-  }
-
-  servers.forEach((serverId) => {
-    print.info("Pinging server", serverId);
-
-    // Send these with "" marks
-    Object.keys(matchzy_commands).forEach((command) => {
-      const value = matchzy_commands[command as keyof typeof matchzy_commands];
-      sendCommand(serverId, `${command}${value ? " " + value : ""}`);
-    });
-
-    if (process.env.send_tv_commands === "true")
-      // Send these without "" marks
-      Object.keys(tv_commands).forEach((command) => {
-        sendCommand(
-          serverId,
-          `${command} ${tv_commands[command as keyof typeof tv_commands]}`
-        );
-      });
-  });
-}, Number(process.env.ping_timeout) || 600000);
