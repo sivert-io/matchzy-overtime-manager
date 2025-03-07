@@ -86,4 +86,4 @@ setInterval(() => {
         );
       });
   });
-}, 600000);
+}, Number(process.env.ping_timeout) || 600000);
