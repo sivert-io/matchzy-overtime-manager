@@ -32,6 +32,13 @@ export async function PingServers() {
       }
     }
   }
+
+  print.info("Finished pinging all servers.");
+  print.info(
+    "Waiting for next ping in " +
+      (Number(process.env.ping_timeout) || 600000) / 1000 +
+      " minutes."
+  );
 }
 
 // Helper function for delay
