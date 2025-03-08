@@ -36,7 +36,7 @@ export async function PingServers() {
   print.info("✔ Finished pinging all servers.");
   print.info(
     `ℹ Waiting for next ping in ${
-      (Number(process.env.ping_timeout) || 600000) / 1000
+      (Number(process.env.ping_timeout) || 300000) / 60000
     } minutes.`
   );
 }
