@@ -14,13 +14,13 @@ export async function PingServers() {
     print.info(`Pinging server ${serverId}`);
 
     const commands: string[] = [
-      ...Object.keys(matchzy_commands).map(
-        (command) =>
-          `${command} ${
-            matchzy_commands[command as keyof typeof matchzy_commands] || ""
-          }`
-      ),
+      ...Object.keys(matchzy_commands).map((command) => {
+        const cmd = matchzy_commands[command as keyof typeof matchzy_commands];
+        return `${command} ${(cmd && `"${cmd}"`) || ""}`;
+      }),
     ];
+
+    commands.push("matchzy_remote_log_header_value " + serverId);
 
     if (process.env.send_tv_commands === "true") {
       commands.push(
