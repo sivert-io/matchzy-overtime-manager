@@ -1,9 +1,8 @@
 import { Logger as print } from "lovely-logs";
 import { matchzy_commands, tv_commands } from "../data/commands_to_send_server";
-import RconSingleton from "./rcon"; // Adjust the path accordingly
+import RconSingleton from "./rcon"; // Adjust the path
 
 export async function PingServers() {
-  // Ping all servers
   const servers = process.env.server_ids_to_ping?.split(",");
 
   if (!servers || servers.length === 0) {
@@ -12,49 +11,40 @@ export async function PingServers() {
   }
 
   for (const serverId of servers) {
-    print.info("Pinging server", serverId);
+    print.info(`Pinging server ${serverId}`);
 
-    const commands: string[] = [];
-
-    // Send these with "" marks
-    for (const command of Object.keys(matchzy_commands)) {
-      const value = matchzy_commands[command as keyof typeof matchzy_commands];
-      commands.push(`${command}${value ? " " + value : ""}`);
-    }
+    const commands: string[] = [
+      ...Object.keys(matchzy_commands).map(
+        (command) =>
+          `${command} ${
+            matchzy_commands[command as keyof typeof matchzy_commands] || ""
+          }`
+      ),
+    ];
 
     if (process.env.send_tv_commands === "true") {
-      // Send these without "" marks
-      for (const command of Object.keys(tv_commands)) {
-        commands.push(
-          `${command} ${tv_commands[command as keyof typeof tv_commands]}`
-        );
-      }
+      commands.push(
+        ...Object.keys(tv_commands).map(
+          (command) =>
+            `${command} ${tv_commands[command as keyof typeof tv_commands]}`
+        )
+      );
     }
 
-    // Send all commands in one batch
     try {
-      print.info(`Sending commands to ${serverId}:`, commands);
       const responses = await RconSingleton.sendCommands(serverId, commands);
       responses.forEach((response, index) => {
-        print.success(`Response for command ${commands[index]}: ${response}`);
+        print.info(`✔ Response for command ${commands[index]}: ${response}`);
       });
     } catch (error) {
       print.error(`Failed to send commands to ${serverId}:`, error);
     }
-
-    // Delay for 1 second before pinging the next server
-    await delay(1000);
   }
 
-  print.success("Finished pinging all servers.");
+  print.info("✔ Finished pinging all servers.");
   print.info(
-    "Waiting for next ping in " +
-      (Number(process.env.ping_timeout) || 600000) / 1000 +
-      " minutes."
+    `ℹ Waiting for next ping in ${
+      (Number(process.env.ping_timeout) || 600000) / 1000
+    } minutes.`
   );
-}
-
-// Helper function for delay
-function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }
