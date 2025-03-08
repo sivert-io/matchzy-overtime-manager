@@ -6,6 +6,7 @@ import { handleRoundEndEvent } from "./utils/match";
 import { sendWebhook } from "./utils/webhook";
 import { calculateTeamDamage } from "./utils/tools";
 import { PingServers } from "./utils/pingServers";
+import axios from "axios"; // Import Axios for HTTP requests
 
 createLogger({
   platform: "console",
@@ -54,9 +55,11 @@ app.post("/events", (req, res) => {
 
 let timer: NodeJS.Timeout | null = null;
 
-app.get("/startPing", (_req, res) => {
+// Start pinging servers
+function startPinging() {
   if (timer) {
-    return res.status(400).send("Ping is already running.");
+    print.warn("⚠️ Ping is already running.");
+    return;
   }
 
   timer = setInterval(() => {
@@ -64,6 +67,11 @@ app.get("/startPing", (_req, res) => {
   }, Number(process.env.ping_timeout) || 600000);
 
   PingServers();
+  print.success("✔ Auto-started pinging servers.");
+}
+
+app.get("/startPing", (_req, res) => {
+  startPinging();
   res.send("Ping started.");
 });
 
@@ -80,4 +88,12 @@ app.get("/stopPing", (_req, res) => {
 app.listen(PORT, () => {
   console.clear();
   print.success(`MOM is running on port ${PORT}`);
+
+  // Self-ping to start automatic pinging
+  setTimeout(() => {
+    axios
+      .get(`http://localhost:${PORT}/startPing`)
+      .then(() => print.success("✔ Auto-started pinging servers."))
+      .catch((error) => print.error("❌ Failed to auto-start pinging:", error));
+  }, 2000); // Small delay to ensure the server is ready
 });
