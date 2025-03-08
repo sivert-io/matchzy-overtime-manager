@@ -58,7 +58,7 @@ class RconSingleton {
         const response = await client.send(command);
         print.info(`Response from RCON server: ${response}`);
         responses.push(`${response}`);
-        await this.delay(100); // Small delay to prevent overwhelming the RCON connection
+        await this.delay(1000); // Small delay to prevent overwhelming the RCON connection
       }
     } catch (error) {
       print.error(`Error while sending commands to ${serverId}:`, error);
