@@ -14,50 +14,63 @@ class RconSingleton {
     return RconSingleton.instance;
   }
 
-  private createClient(serverid: string): Rcon {
-    const rcon_host = process.env[`${serverid}_rcon_host`];
-    const rcon_port = Number(process.env[`${serverid}_rcon_port`]);
-    const rcon_password = process.env[`${serverid}_rcon_password`];
+  private async createClient(serverId: string): Promise<Rcon> {
+    const rcon_host = process.env[`${serverId}_rcon_host`];
+    const rcon_port = Number(process.env[`${serverId}_rcon_port`]);
+    const rcon_password = process.env[`${serverId}_rcon_password`];
 
     if (!rcon_host || !rcon_port || !rcon_password) {
-      throw new Error("RCON details not found for " + serverid);
+      throw new Error(`RCON details not found for ${serverId}`);
     }
 
     const client = new Rcon(rcon_host, rcon_port, rcon_password);
-    this.clients.set(serverid, client);
+    this.clients.set(serverId, client);
+
+    try {
+      print.info(`Connecting to RCON server ${serverId}`);
+      await client.connect();
+      print.info(`Connected to RCON server ${serverId}`);
+    } catch (error) {
+      print.error(`Failed to connect to RCON server ${serverId}`, error);
+      this.clients.delete(serverId);
+      throw error;
+    }
+
     return client;
   }
 
   public async sendCommands(
-    serverid: string,
+    serverId: string,
     commands: string[]
   ): Promise<string[]> {
-    let client = this.clients.get(serverid) || this.createClient(serverid);
+    let client =
+      this.clients.get(serverId) || (await this.createClient(serverId));
 
-    print.info("Connecting to RCON server", serverid);
+    print.info(`Sending commands to server ${serverId}:`, commands);
+
+    const responses: string[] = [];
 
     try {
-      await client.connect();
-      print.info("Connected to RCON server", serverid);
-
-      const responses: string[] = [];
       for (const command of commands) {
-        print.info("Sending command to RCON", command);
-        const res = await client.send(command);
-        print.info("Response from RCON server", res);
-        responses.push(`${res}`);
+        print.info(`Sending command to RCON: ${command}`);
+        const response = await client.send(command);
+        print.info(`Response from RCON server: ${response}`);
+        responses.push(`${response}`);
+        await this.delay(100); // Small delay to prevent overwhelming the RCON connection
       }
-
-      client.disconnect();
-      this.clients.delete(serverid);
-
-      return responses;
     } catch (error) {
-      print.error("Error occurred", error);
+      print.error(`Error while sending commands to ${serverId}:`, error);
+    } finally {
+      print.info(`Closing RCON connection for server ${serverId}`);
       client.disconnect();
-      this.clients.delete(serverid);
-      throw error;
+      this.clients.delete(serverId);
     }
+
+    return responses;
+  }
+
+  private async delay(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }
 
