@@ -4,6 +4,7 @@ import { Logger as print } from "lovely-logs";
 class RconSingleton {
   private static instance: RconSingleton;
   private clients: Map<string, Rcon> = new Map();
+  private activeConnections: Set<string> = new Set(); // Track active connections
 
   private constructor() {}
 
@@ -15,6 +16,13 @@ class RconSingleton {
   }
 
   private async createClient(serverId: string): Promise<Rcon | null> {
+    if (this.activeConnections.has(serverId)) {
+      print.warn(
+        `⚠️ Connection for ${serverId} already exists, skipping new connection.`
+      );
+      return this.clients.get(serverId) || null;
+    }
+
     const rcon_host = process.env[`${serverId}_rcon_host`];
     const rcon_port = Number(process.env[`${serverId}_rcon_port`]);
     const rcon_password = process.env[`${serverId}_rcon_password`];
@@ -30,7 +38,8 @@ class RconSingleton {
       print.info(`🔌 Connecting to RCON server ${serverId}`);
       await client.connect();
       print.info(`✅ Connected to RCON server ${serverId}`);
-      this.clients.set(serverId, client); // Store only if connection succeeds
+      this.clients.set(serverId, client);
+      this.activeConnections.add(serverId);
       return client;
     } catch (error) {
       print.error(`❌ Failed to connect to RCON server ${serverId}:`, error);
@@ -65,9 +74,12 @@ class RconSingleton {
     } catch (error) {
       print.error(`❌ Error while sending commands to ${serverId}:`, error);
     } finally {
-      print.info(`🔌 Closing RCON connection for ${serverId}`);
-      client.disconnect();
-      this.clients.delete(serverId);
+      if (this.activeConnections.has(serverId)) {
+        print.info(`🔌 Closing RCON connection for ${serverId}`);
+        client.disconnect();
+        this.clients.delete(serverId);
+        this.activeConnections.delete(serverId);
+      }
     }
 
     return responses;
