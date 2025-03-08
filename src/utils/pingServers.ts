@@ -1,6 +1,6 @@
 import { Logger as print } from "lovely-logs";
 import { matchzy_commands, tv_commands } from "../data/commands_to_send_server";
-import RconSingleton from "./rcon"; // Adjust the path
+import { sendCommands } from "./rcon"; // Adjust the path
 
 export async function PingServers() {
   const servers = process.env.server_ids_to_ping?.split(",");
@@ -30,15 +30,7 @@ export async function PingServers() {
         )
       );
     }
-
-    try {
-      const responses = await RconSingleton.sendCommands(serverId, commands);
-      responses.forEach((response, index) => {
-        print.info(`✔ Response for command ${commands[index]}: ${response}`);
-      });
-    } catch (error) {
-      print.error(`Failed to send commands to ${serverId}:`, error);
-    }
+    await sendCommands(serverId, commands);
   }
 
   print.info("✔ Finished pinging all servers.");

@@ -1,6 +1,6 @@
 import { Logger as print } from "lovely-logs";
 import { RoundEndEvent } from "../types/round_events";
-import RconSingleton from "./rcon"; // Adjust the path accordingly
+import { sendCommands } from "./rcon"; // Adjust the path accordingly
 import { printTeamIndividualDamage } from "./tools";
 import { sendWebhook } from "./webhook";
 
@@ -27,9 +27,9 @@ export async function endMatch(
   ];
 
   try {
-    await RconSingleton.sendCommands(serverId, commands);
+    await sendCommands(serverId, commands);
   } catch (error) {
-    print.error(`Error sending RCON commands to ${serverId}:`, error);
+    print.error(`❌ Error sending RCON commands to ${serverId}:`, error);
   }
 
   sendWebhook({
