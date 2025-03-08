@@ -33,9 +33,10 @@ export async function PingServers() {
 
     // Send all commands in one batch
     try {
+      print.info(`Sending commands to ${serverId}:`, commands);
       const responses = await RconSingleton.sendCommands(serverId, commands);
       responses.forEach((response, index) => {
-        print.info(`Response for command ${commands[index]}: ${response}`);
+        print.success(`Response for command ${commands[index]}: ${response}`);
       });
     } catch (error) {
       print.error(`Failed to send commands to ${serverId}:`, error);
@@ -45,7 +46,7 @@ export async function PingServers() {
     // await delay(1000);
   }
 
-  print.info("Finished pinging all servers.");
+  print.success("Finished pinging all servers.");
   print.info(
     "Waiting for next ping in " +
       (Number(process.env.ping_timeout) || 600000) / 1000 +
