@@ -42,8 +42,8 @@ export async function PingServers() {
       print.error(`Failed to send commands to ${serverId}:`, error);
     }
 
-    // We probably dont need delay with an rcon-singleton that sends bursts to each server.
-    // await delay(1000);
+    // Delay for 1 second before pinging the next server
+    await delay(1000);
   }
 
   print.success("Finished pinging all servers.");
