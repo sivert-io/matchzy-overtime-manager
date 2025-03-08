@@ -43,14 +43,16 @@ class RconSingleton {
     serverId: string,
     commands: string[]
   ): Promise<string[]> {
-    let client =
-      this.clients.get(serverId) || (await this.createClient(serverId));
+    let client = this.clients.get(serverId);
 
     print.info(`Sending commands to server ${serverId}:`, commands);
 
     const responses: string[] = [];
 
     try {
+      if (!client) {
+        client = await this.createClient(serverId);
+      }
       for (const command of commands) {
         print.info(`Sending command to RCON: ${command}`);
         const response = await client.send(command);
@@ -62,7 +64,7 @@ class RconSingleton {
       print.error(`Error while sending commands to ${serverId}:`, error);
     } finally {
       print.info(`Closing RCON connection for server ${serverId}`);
-      client.disconnect();
+      client?.disconnect();
       this.clients.delete(serverId);
     }
 
