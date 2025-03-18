@@ -2,6 +2,9 @@
 
 MOM is an extension for the MatchZy CS2 plugin. It runs as an Express server in TypeScript, listens for get5 events, and enforces custom overtime rules to prevent excessive overtimes in tournaments. 🎮🏆
 
+> [!CAUTION]
+> This plugin cannot be run simultaneously with any get5 panel, as it takes over the endpoint used by the panel. MOM uses the same logic to receive events from the server as a get5 panel would. If you need to use both at the same time, you will have to create a middle-man service to forward events to both, or modify either the get5-panel or this plugin to handle event forwarding.
+
 <video width="100%" autoplay muted loop>
  <source src="./docs/public/preview.mp4" type="video/mp4" />
   Your browser does not support the video tag.
